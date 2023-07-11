@@ -15,6 +15,7 @@ import MedicinesCreateModal from "../../Components/MedicinesCreateModal";
 export default function Medicines() {
   const [items, setItems] = useState<any>();
   const [createMedicineModal, setCreateMedicineModal] = useState<boolean>(false);
+  const [values, setValues] = useState<any>({});
 
   useEffect(() => {
     medicineService.getAll()

@@ -1,4 +1,5 @@
 import db from "../Database";
+import MedicineModel, { MedicineModelInterface } from "../Models/Medicine.model";
 
 const tableName = "Medicines";
 
@@ -40,15 +41,22 @@ class MedicineService {
     });
   }
 
-  async post() {
-    db.transaction((tx) => {
-      tx.executeSql(
-        `INSERT INTO ${tableName} (Name) VALUES ("Teste");`
-      ),
-        []
-    }
-      , (error) => console.log(error)
-    );
+  async post(data: any) {
+    const medicineData = new MedicineModel(data);
+    const keys = Object.keys(medicineData);
+    const values = Object.values(medicineData);
+
+    console.log(keys);
+    console.log(values);
+
+    // db.transaction((tx) => {
+    //   tx.executeSql(
+    //     `INSERT INTO ${tableName} (?) VALUES (?);`
+    //   ),
+    //     []
+    // }
+    //   , (error) => console.log(error)
+    // );
   }
 }
 
