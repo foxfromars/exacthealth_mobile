@@ -7,7 +7,7 @@ import migrations from "./src/Database/migrations/";
 export default function App() {
   useEffect(() => {
     async function startUp() {
-      migrations.runAll();
+      await migrations.runAll();
     }
     startUp();
   });

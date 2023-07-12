@@ -18,13 +18,13 @@ export default function GridTemplate({
 }: Props) {
 
   return (
-    <SafeAreaView >
+    <>
       <GridTemplateComponent
         data={children}
         renderItem={(item) => item.item}
         numColumns={columns ? columns : 1}
       />
-    </SafeAreaView>
+    </>
   );
 };
 

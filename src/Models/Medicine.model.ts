@@ -15,7 +15,6 @@ class MedicineModel {
   name: string;
   type: string;
   description: string;
-  createdAt: Date;
 
   constructor({
     name,
@@ -26,7 +25,6 @@ class MedicineModel {
     this.name = name;
     this.type = type;
     this.description = description;
-    this.createdAt = new Date();
   }
 }
 

@@ -48,15 +48,33 @@ class MedicineService {
 
     console.log(keys);
     console.log(values);
-
-    // db.transaction((tx) => {
-    //   tx.executeSql(
-    //     `INSERT INTO ${tableName} (?) VALUES (?);`
-    //   ),
-    //     []
-    // }
-    //   , (error) => console.log(error)
-    // );
+    console.log(keys.concat(values));
+    return new Promise((resolve, reject) => {
+      db.transaction(
+        (tx) => {
+          tx.executeSql(
+            `INSERT INTO ${tableName} (name, type, description) VALUES (?,?,?);`,
+            values,
+            (_, results) => {
+              console.log(results);
+              resolve(results.rows._array);
+            },
+            function(error) {
+              console.log(error);
+              resolve(false);
+              throw error;
+            });
+        },
+        function(error) {
+          console.log(error);
+          reject(undefined);
+          throw new Error('error: ' + error.message);
+        },
+        function() {
+          console.log('ok');
+        }
+      )
+    });
   }
 }
 

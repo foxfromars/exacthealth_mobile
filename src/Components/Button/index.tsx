@@ -1,25 +1,25 @@
-import {
-  Pressable,
-  View,
-} from "react-native";
-import { ReactElement, ReactEventHandler } from "react";
-import { ButtonContainer } from "./styles";
+import { ReactEventHandler } from "react";
+import { ButtonContainer, ButtonText } from "./styles";
 
 interface Props {
   onClick?(event: ReactEventHandler): void;
-  children?: string;
+  text?: string;
+  color?: string;
+  backgroundColor?: string;
 }
 
 export default function Button({
   onClick,
-  children,
+  text,
 }: Props) {
 
   return (
     <ButtonContainer
-      onClick={onClick}
+      onPress={onClick}
     >
-      {children}
+      <ButtonText>
+        {text}
+      </ButtonText>
     </ButtonContainer>
   );
 }
