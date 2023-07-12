@@ -11,7 +11,10 @@ const Theme: ThemeInterface = {
     text: {
       main: "#000000",
       secondary: "#ffffff",
-    }
+    },
+    subtext: {
+      main: "grey",
+    },
   }
 };
 

@@ -13,6 +13,7 @@ import medicineService from "../../Services/medicine.service";
 import MedicinesListItem from "../../Components/MedicinesListItem";
 import FloatButtonCreateMedicines from "../../Components/FloatButtonCreateMedicines";
 import MedicinesCreateModal from "../../Components/MedicinesCreateModal";
+import MedicinesList from "../../Components/MedicinesList";
 
 
 export default function Medicines() {
@@ -44,6 +45,7 @@ export default function Medicines() {
       <ScrollView
         contentContainerStyle={{
           flex: 1,
+          alignItems: "center",
         }}
         refreshControl={
           <RefreshControl
@@ -55,17 +57,18 @@ export default function Medicines() {
         <SessionTitle
           primary="Medicines"
         />
-        <ListContainer>
+        <MedicinesList>
           {
             items ? items.map((e: any) => {
               return <MedicinesListItem
                 id={e.id}
                 name={e.name}
+                description={e.description}
                 key={e.id}
               />
             }) : null
           }
-        </ListContainer>
+        </MedicinesList>
       </ScrollView>
       <FloatButtonCreateMedicines
         onPress={() => setCreateMedicineModal(true)}

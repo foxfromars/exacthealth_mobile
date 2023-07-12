@@ -27,21 +27,15 @@ export default function MedicinesCreateModal({
   }
 
   async function handleCreate() {
-    try {
-      await medicineService.post(value)
-        .then((e) => {
-          console.log(e);
-          return e;
-        })
-        .catch((err) => {
-          console.log(err);
-          throw err;
-        });
-      setOpen(false);
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
+    await medicineService.post(value)
+      .then((e) => {
+        console.log(e);
+        return e;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setOpen(false);
   }
 
   return (

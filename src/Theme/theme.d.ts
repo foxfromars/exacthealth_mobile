@@ -12,6 +12,9 @@ export default interface Theme {
       main: string;
       secondary?: string;
     },
+    subtext?: {
+      main: string;
+    },
     error?: {
       main: string;
       secondary?: string;

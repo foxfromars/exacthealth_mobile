@@ -8,6 +8,9 @@ export const HeaderText = styled.Text`
 //@ts-ignore
 export const HeaderContainer = styled.View`
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
   height: 140px;
   font-family: "Roboto";
   display: flex;

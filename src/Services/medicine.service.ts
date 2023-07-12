@@ -43,12 +43,9 @@ class MedicineService {
 
   async post(data: any) {
     const medicineData = new MedicineModel(data);
-    const keys = Object.keys(medicineData);
     const values = Object.values(medicineData);
 
-    console.log(keys);
     console.log(values);
-    console.log(keys.concat(values));
     return new Promise((resolve, reject) => {
       db.transaction(
         (tx) => {
@@ -60,15 +57,13 @@ class MedicineService {
               resolve(results.rows._array);
             },
             function(error) {
-              console.log(error);
-              resolve(false);
-              throw error;
+              reject(error);
+              return false;
             });
         },
         function(error) {
           console.log(error);
-          reject(undefined);
-          throw new Error('error: ' + error.message);
+          reject(error);
         },
         function() {
           console.log('ok');
