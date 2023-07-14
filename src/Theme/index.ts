@@ -1,3 +1,4 @@
+import { Dimensions } from "react-native";
 import ThemeInterface from "./theme";
 
 const Theme: ThemeInterface = {
@@ -15,7 +16,14 @@ const Theme: ThemeInterface = {
     subtext: {
       main: "grey",
     },
-  }
+    background: {
+      main: "white",
+    }
+  },
+  dimensions: {
+    screenWidth: Dimensions.get("window").width,
+    screenHeight: Dimensions.get("window").height,
+  },
 };
 
 export default Theme;

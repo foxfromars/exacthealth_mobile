@@ -7,7 +7,6 @@ import {
   ScrollView
 } from "react-native";
 
-import { ListContainer } from "../../Components/List/styles";
 import SessionTitle from "../../Components/SessionTitle";
 import medicineService from "../../Services/medicine.service";
 import MedicinesListItem from "../../Components/MedicinesListItem";
@@ -20,6 +19,7 @@ export default function Medicines() {
   const [items, setItems] = useState<any>();
   const [createMedicineModal, setCreateMedicineModal] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [selectedItem, setSelectedItem] = useState<number | null>(null);
 
   useEffect(() => {
     medicineService.getAll()
@@ -32,6 +32,7 @@ export default function Medicines() {
     setRefreshing(true);
     medicineService.getAll()
       .then((result) => {
+        console.log(result);
         setItems(result);
       })
       .catch((err) => {
@@ -63,6 +64,8 @@ export default function Medicines() {
               return <MedicinesListItem
                 id={e.id}
                 name={e.name}
+                type={e.type}
+                quantity={e.quantity}
                 description={e.description}
                 key={e.id}
               />

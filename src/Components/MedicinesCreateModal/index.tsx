@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import GridTemplate from "../GridTemplate";
 import Button from "../Button";
 import medicineService from "../../Services/medicine.service";
+import { View } from "react-native";
 
 interface Props {
   isOpen: boolean;
@@ -30,6 +31,7 @@ export default function MedicinesCreateModal({
     await medicineService.post(value)
       .then((e) => {
         console.log(e);
+        setValue({});
         return e;
       })
       .catch((err) => {
@@ -53,11 +55,19 @@ export default function MedicinesCreateModal({
             name="name"
             label="Name"
             onChange={handleChange}
+            type="text"
           />
           <TextField
             name="type"
             label="Type"
             onChange={handleChange}
+            type="text"
+          />
+          <TextField
+            name="quantity"
+            label="Quantity"
+            onChange={handleChange}
+            type="number"
           />
           <TextField
             name="description"
@@ -65,10 +75,16 @@ export default function MedicinesCreateModal({
             onChange={handleChange}
             multiline={true}
             numberOfLines={5}
+            type="text"
           />
         </GridTemplate>
-        <GridTemplate
-          columns={2}
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+            width: "100%",
+          }}
         >
           <Button
             text="Cancel"
@@ -78,7 +94,7 @@ export default function MedicinesCreateModal({
             text="Create"
             onClick={handleCreate}
           />
-        </GridTemplate>
+        </View>
       </Container>
     </CreateModal>
   );

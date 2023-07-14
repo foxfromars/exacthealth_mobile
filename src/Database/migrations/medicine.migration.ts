@@ -1,6 +1,6 @@
 import db from "..";
 
-const rows = "id INTEGER PRIMARY KEY, name TEXT NOT NULL, type TEXT NOT NULL, description TEXT NOT NULL";
+const rows = "id INTEGER PRIMARY KEY, name TEXT NOT NULL, type TEXT NOT NULL, quantity INTEGER,description TEXT NOT NULL";
 
 
 class MedicineMigration {

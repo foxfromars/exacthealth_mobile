@@ -1,5 +1,5 @@
 import db from "../Database";
-import MedicineModel, { MedicineModelInterface } from "../Models/Medicine.model";
+import MedicineModel from "../Models/Medicine.model";
 
 const tableName = "Medicines";
 
@@ -43,15 +43,17 @@ class MedicineService {
 
   async post(data: any) {
     const medicineData = new MedicineModel(data);
-    const values = Object.values(medicineData);
-
-    console.log(values);
     return new Promise((resolve, reject) => {
       db.transaction(
         (tx) => {
           tx.executeSql(
-            `INSERT INTO ${tableName} (name, type, description) VALUES (?,?,?);`,
-            values,
+            `INSERT INTO ${tableName} (name, type, quantity, description) VALUES (?,?,?,?);`,
+            [
+              medicineData.name,
+              medicineData.type,
+              medicineData.quantity,
+              medicineData.description,
+            ],
             (_, results) => {
               console.log(results);
               resolve(results.rows._array);

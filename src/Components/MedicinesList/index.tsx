@@ -8,7 +8,6 @@ interface Props {
 export default function GridTemplate({
   children,
 }: Props) {
-  console.log(children);
 
   return (
     <MedicineListContainer>

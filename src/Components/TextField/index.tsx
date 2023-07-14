@@ -13,6 +13,7 @@ interface Props {
   value?: string | null;
   multiline?: boolean;
   numberOfLines?: number;
+  type: "text" | "number";
 }
 
 export default function TextFieldComponent({
@@ -22,7 +23,18 @@ export default function TextFieldComponent({
   name,
   multiline,
   numberOfLines,
+  type,
 }: Props) {
+
+  function handleChange(value: string) {
+    if(type === "text") {
+      onChange(value, name);
+    }  
+    else if(type === "number") {
+      const number = value.replace(/[^0-9]/g, '') 
+      onChange(number, name);
+    }
+  }
 
   return (
     <TextInputWraper>
@@ -31,7 +43,7 @@ export default function TextFieldComponent({
       }
       <TextField
         value={value}
-        onChangeText={(text: string) => onChange(text, name)}
+        onChangeText={handleChange}
         multiline={multiline ? multiline : false}
         numberOfLines={numberOfLines}
       />

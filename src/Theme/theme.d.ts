@@ -2,7 +2,7 @@ export default interface Theme {
   palette?: {
     primary?: {
       main: string;
-      secondary?: string; 
+      secondary?: string;
     },
     secondary?: {
       main: string;
@@ -36,4 +36,8 @@ export default interface Theme {
       secondary?: string;
     },
   };
+  dimensions: {
+    screenWidth: number;
+    screenHeight: number;
+  }
 }
