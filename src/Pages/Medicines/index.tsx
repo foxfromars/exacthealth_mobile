@@ -13,11 +13,13 @@ import MedicinesListItem from "../../Components/MedicinesListItem";
 import FloatButtonCreateMedicines from "../../Components/FloatButtonCreateMedicines";
 import MedicinesCreateModal from "../../Components/MedicinesCreateModal";
 import MedicinesList from "../../Components/MedicinesList";
+import MedicinesDetailModal from "../../Components/MedicinesDetailModal";
 
 
 export default function Medicines() {
   const [items, setItems] = useState<any>();
   const [createMedicineModal, setCreateMedicineModal] = useState<boolean>(false);
+  const [detailMedicineModal, setDetailMedicineModal] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
 
@@ -27,6 +29,11 @@ export default function Medicines() {
         setItems(result);
       });
   }, []);
+
+  useEffect(() => {
+    console.log(selectedItem)
+    console.log(detailMedicineModal);
+  }, [selectedItem]);
 
   async function onRefresh() {
     setRefreshing(true);
@@ -67,6 +74,10 @@ export default function Medicines() {
                 type={e.type}
                 quantity={e.quantity}
                 description={e.description}
+                onClick={(props: any) => {
+                  setSelectedItem(props.id);
+                  setDetailMedicineModal(true);
+                }}
                 key={e.id}
               />
             }) : null
@@ -79,6 +90,11 @@ export default function Medicines() {
       <MedicinesCreateModal
         isOpen={createMedicineModal}
         setOpen={setCreateMedicineModal}
+      />
+      <MedicinesDetailModal
+        id={selectedItem}
+        isOpen={detailMedicineModal}
+        setOpen={setDetailMedicineModal}
       />
     </>
   );

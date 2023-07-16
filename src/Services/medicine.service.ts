@@ -8,7 +8,9 @@ class MedicineService {
     return new Promise((resolve, reject) => {
       db.transaction(
         (tx) => {
-          tx.executeSql("SELECT * FROM Medicines", [],
+          tx.executeSql(
+            "SELECT * FROM Medicines",
+            [],
             (_, results) => {
               console.log(results);
               resolve(results.rows._array);
@@ -22,7 +24,6 @@ class MedicineService {
         },
         function(error) {
           reject(undefined);
-          throw new Error('error: ' + error.message);
         },
         function() {
           console.log('ok');
@@ -32,12 +33,29 @@ class MedicineService {
   }
 
   async getOne(id: number) {
-    db.transaction((tx) => {
-      tx.executeSql(
-        `SELECT * FROM ${tableName} WHERE Id=${id};`,
-        [],
-        (_, result) => console.log(result)
-      )
+    return new Promise((resolve, reject) => {
+      db.transaction((tx) => {
+        tx.executeSql(
+          `SELECT * FROM ${tableName} WHERE Id=?;`,
+          [id],
+          (_, result) => {
+            console.log(result);
+            resolve(result.rows._array);
+          },
+          function(error) {
+            reject(false);
+            throw new Error('error: ' + error);
+          }
+        )
+      },
+      function(error) {
+        console.log(error);
+        reject(undefined)
+      },
+      function() {
+        console.log("Ok");
+      }
+      );
     });
   }
 

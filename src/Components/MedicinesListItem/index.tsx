@@ -1,3 +1,4 @@
+import { ReactEventHandler } from "react";
 import { View } from "react-native";
 import {
   MedicinesListItemContainer,
@@ -12,6 +13,7 @@ interface Props {
   type: string;
   quantity: number;
   description?: string;
+  onClick?: any;
 }
 
 export default function MedicinesListItem({
@@ -20,10 +22,15 @@ export default function MedicinesListItem({
   type,
   quantity,
   description,
+  onClick,
 }: Props) {
 
   return (
-    <MedicinesListItemContainer>
+    <MedicinesListItemContainer
+      onPress={() => {
+        onClick({ id });
+      }}
+    >
       <View
         style={{
           display: "flex",
