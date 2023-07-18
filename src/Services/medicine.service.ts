@@ -48,13 +48,13 @@ class MedicineService {
           }
         )
       },
-      function(error) {
-        console.log(error);
-        reject(undefined)
-      },
-      function() {
-        console.log("Ok");
-      }
+        function(error) {
+          console.log(error);
+          reject(undefined)
+        },
+        function() {
+          console.log("Ok");
+        }
       );
     });
   }
@@ -88,6 +88,68 @@ class MedicineService {
         function() {
           console.log('ok');
         }
+      )
+    });
+  }
+
+  async deleteOne(id: number) {
+    return new Promise((resolve, reject) => {
+      db.transaction(
+        (tx) => {
+          tx.executeSql(
+            `
+            DELETE
+            FROM ${tableName} 
+            WHERE id=?;
+            `,
+            [id],
+            (_, results) => {
+              console.log(results);
+              resolve(results.rows._array);
+            },
+            function(error) {
+              reject(error);
+              return false;
+            });
+        },
+        function(error) {
+          console.log(error);
+          reject(error);
+        },
+        function() {
+          console.log('ok');
+          }
+      )
+    });
+  }
+
+  async update() {
+    return new Promise((resolve, reject) => {
+      db.transaction(
+        (tx) => {
+          tx.executeSql(
+            `
+            DELETE
+            FROM ${tableName} 
+            WHERE id=?;
+            `,
+            [],
+            (_, results) => {
+              console.log(results);
+              resolve(results.rows._array);
+            },
+            function(error) {
+              reject(error);
+              return false;
+            });
+        },
+        function(error) {
+          console.log(error);
+          reject(error);
+        },
+        function() {
+          console.log('ok');
+          }
       )
     });
   }
